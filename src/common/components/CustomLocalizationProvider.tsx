@@ -1,4 +1,4 @@
-import { LocalizationProvider } from "@mui/x-date-pickers";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import updateLocale from "dayjs/plugin/updateLocale";
@@ -15,8 +15,9 @@ import isBetween from "dayjs/plugin/isBetween";
 import isTomorrow from "dayjs/plugin/isTomorrow";
 import isYesterday from "dayjs/plugin/isYesterday";
 import isLeapYear from "dayjs/plugin/isLeapYear";
-import { FC } from "react";
+import { FC, useState } from "react";
 import "dayjs/locale/th";
+import { TextField } from "@mui/material";
 
 // Load dayjs plugins
 dayjs.extend(updateLocale);
@@ -58,7 +59,7 @@ export const getDatetimePickerFormats = (
   return dateTimePickerFormats("BC");
 };
 
-const DateAdapter = ({ locale }: { locale: string }): DateAdapterType => {
+function DateAdapter({ locale }: { locale: string }): DateAdapterType {
   dayjs.locale(locale);
   dayjs.tz.setDefault("Asia/Bangkok");
   console.log("LOCALE:" + locale);
@@ -77,14 +78,27 @@ const DateAdapter = ({ locale }: { locale: string }): DateAdapterType => {
       }));
     },
   };
-};
+}
 
 export const CustomLocalizationProvider: FC = (props) => {
+  const [value, setValue] = useState<Date | null>(new Date());
   // TODO: Add a selector to get the current language
   // TODO: Update "locale" prop in <LocalizationProvider/>
   return (
     <LocalizationProvider dateAdapter={DateAdapter as any} locale={"th"}>
       {props.children}
+      <DatePicker
+        disableFuture
+        label="Responsive"
+        openTo="year"
+        views={["year", "month", "day"]}
+        value={value}
+        inputFormat={dayjs.locale() === "th" ? "DD/MM/BBBB" : "DD/MM/YYYY"}
+        onChange={(newValue) => {
+          setValue(newValue);
+        }}
+        renderInput={(params) => <TextField {...params} />}
+      />
     </LocalizationProvider>
   );
 };
