@@ -61,7 +61,6 @@ export const getDatetimePickerFormats = (
 function DateAdapter({ locale }: { locale: string }): DateAdapterType {
   dayjs.locale(locale);
   dayjs.tz.setDefault("Asia/Bangkok");
-  console.log("LOCALE:" + locale);
   const adapter = new AdapterDayjs({
     locale,
     instance: dayjs,
