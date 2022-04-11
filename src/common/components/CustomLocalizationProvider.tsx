@@ -17,7 +17,6 @@ import isYesterday from "dayjs/plugin/isYesterday";
 import isLeapYear from "dayjs/plugin/isLeapYear";
 import { FC } from "react";
 import "dayjs/locale/th";
-import { Box } from "@mui/material";
 
 // Load dayjs plugins
 dayjs.extend(updateLocale);
@@ -34,8 +33,6 @@ dayjs.extend(isTomorrow);
 dayjs.extend(isYesterday);
 dayjs.extend(isBetween);
 dayjs.extend(isLeapYear);
-
-dayjs.tz.setDefault("Asia/Bangkok");
 
 interface DateAdapterType extends Omit<AdapterDayjs, "getWeekdays"> {
   getWeekdays: () => { charAt: () => string }[];
@@ -61,7 +58,7 @@ export const getDatetimePickerFormats = (
   return dateTimePickerFormats("BC");
 };
 
-function DateAdapter({ locale }: { locale: string }): DateAdapterType {
+const DateAdapter = ({ locale }: { locale: string }): DateAdapterType => {
   dayjs.locale(locale);
   dayjs.tz.setDefault("Asia/Bangkok");
   console.log("LOCALE:" + locale);
@@ -80,18 +77,14 @@ function DateAdapter({ locale }: { locale: string }): DateAdapterType {
       }));
     },
   };
-}
+};
 
 export const CustomLocalizationProvider: FC = (props) => {
+  // TODO: Add a selector to get the current language
+  // TODO: Update "locale" prop in <LocalizationProvider/>
   return (
-    <LocalizationProvider
-      dateAdapter={DateAdapter as any}
-      locale={dayjs.locale() || "th"}
-    >
+    <LocalizationProvider dateAdapter={DateAdapter as any} locale={"th"}>
       {props.children}
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
-        {"Parent Component dayjs.locale():" + dayjs.locale()}
-      </Box>
     </LocalizationProvider>
   );
 };
