@@ -17,6 +17,8 @@ import isYesterday from "dayjs/plugin/isYesterday";
 import isLeapYear from "dayjs/plugin/isLeapYear";
 import { FC } from "react";
 import "dayjs/locale/th";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "../../features/core/coreSlice";
 
 // Load dayjs plugins
 dayjs.extend(updateLocale);
@@ -79,10 +81,10 @@ function DateAdapter({ locale }: { locale: string }): DateAdapterType {
 }
 
 export const CustomLocalizationProvider: FC = (props) => {
-  // TODO: Add a selector to get the current language
-  // TODO: Update "locale" prop in <LocalizationProvider/>
+  const language = useSelector(selectLanguage);
+
   return (
-    <LocalizationProvider dateAdapter={DateAdapter as any} locale={"th"}>
+    <LocalizationProvider dateAdapter={DateAdapter as any} locale={language}>
       {props.children}
     </LocalizationProvider>
   );
