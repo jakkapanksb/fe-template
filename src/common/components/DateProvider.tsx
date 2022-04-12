@@ -78,7 +78,7 @@ function DateAdapter({ locale }: { locale: string }): DateAdapterType {
   };
 }
 
-export const CustomLocalizationProvider: FC = (props) => {
+export const DateProvider: FC = (props) => {
   // TODO: Add a selector to get the current language
   // TODO: Update "locale" prop in <LocalizationProvider/>
   return (

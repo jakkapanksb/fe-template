@@ -4,7 +4,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import "./App.css";
 import logo from "./logo.svg";
 import { theme } from "./theme";
-import { CustomLocalizationProvider } from "./common/components/CustomLocalizationProvider";
+import { DateProvider } from "./common/components/DateProvider";
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material";
 
@@ -12,7 +12,7 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <CustomLocalizationProvider>
+    <DateProvider>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <QueryClientProvider client={queryClient}>
@@ -35,7 +35,7 @@ function App() {
           <ReactQueryDevtools />
         </QueryClientProvider>
       </ThemeProvider>
-    </CustomLocalizationProvider>
+    </DateProvider>
   );
 }
 
