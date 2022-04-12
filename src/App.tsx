@@ -6,7 +6,7 @@ import logo from "./logo.svg";
 import { theme } from "./theme";
 import { CustomLocalizationProvider } from "./common/components/CustomLocalizationProvider";
 import { CssBaseline } from "@mui/material";
-import { ThemeProvider } from "@mui/private-theming";
+import { ThemeProvider } from "@mui/material";
 
 const queryClient = new QueryClient();
 
