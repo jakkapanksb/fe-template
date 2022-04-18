@@ -3,10 +3,11 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import "./App.css";
 import logo from "./logo.svg";
-import { theme } from "./theme";
+import theme from "./theme";
 import { DateProvider } from "./common/components/DateProvider";
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material";
+import "./apis/core/prepareApiMocks";
 
 const queryClient = new QueryClient();
 
