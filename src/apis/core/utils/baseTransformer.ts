@@ -9,15 +9,17 @@ import ApiResponse from "../types/ApiResponse";
 function baseTransformer<T>(data: ApiResponse<T>): ApiResponse<T> {
   // This has been done for IE11.
   // The data object was coming as string & thus the checks were failing.
+
   let updatedData = data;
   if (typeof data === "string") {
     updatedData = JSON.parse(data);
   }
 
-  const statusCode = get(updatedData, "status.code");
-  if (typeof statusCode !== "number" || statusCode <= 0) {
-    throw new Error("Invalid response");
-  }
+  // TODO: Uncomment the following lines after we confirm the response structure.
+  // const statusCode = get(updatedData, "status.code");
+  // if (typeof statusCode !== "number" || statusCode <= 0) {
+  //   throw new Error("Invalid response");
+  // }
   return updatedData;
 }
 

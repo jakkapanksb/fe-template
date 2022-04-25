@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import "./App.css";
 import logo from "./logo.svg";
 import theme from "./theme";
 import { DateProvider } from "./common/components/DateProvider";
-import { CssBaseline } from "@mui/material";
+import { Button, CssBaseline, Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/material";
 import "./apis/core/prepareApiMocks";
+import getMorty from "./apis/sample/getMorty";
+import { GetMorty } from "./apis/sample/types/GetMorty";
+import { environment } from "./utils";
 
 const queryClient = new QueryClient();
 
 function App() {
+  const [data, setData] = useState<any>();
   return (
     <DateProvider>
       <ThemeProvider theme={theme}>
@@ -32,6 +36,20 @@ function App() {
                 Learn React
               </a>
             </header>
+            <Button
+              variant="contained"
+              onClick={async () => {
+                const data = await getMorty();
+                setData(data.data);
+              }}
+            >
+              Fetch Morty!
+            </Button>
+            <Typography>
+              {environment.settings.shouldMockApiResponse
+                ? data?.data.name
+                : data?.name}
+            </Typography>
           </div>
           <ReactQueryDevtools />
         </QueryClientProvider>

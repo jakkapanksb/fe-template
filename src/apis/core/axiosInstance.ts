@@ -27,17 +27,11 @@ export const getCommonHeaders = (): { [key: string]: string } => {
   return commonHeaders;
 };
 
-const apiInstances: Record<ApiType, AxiosInstance> = {
-  default: axios.create({
-    baseURL: environment.urls.apiBase,
-    responseType: "json",
-    transformResponse: (data) => data,
-  }),
-  staticContent: axios.create({
-    baseURL: environment.urls.staticContentBase,
-    responseType: "json",
-  }),
-};
+export const axiosInstance: AxiosInstance = axios.create({
+  baseURL: environment.urls.apiBase,
+  responseType: "json",
+  transformResponse: (data) => data,
+});
 
 /**
  * This interface helps us to save the response transformers.
@@ -53,7 +47,7 @@ interface AxiosRequestCustomConfig extends AxiosRequestConfig {
 
 const logger = createLogger("api:interceptor");
 
-apiInstances.default.interceptors.request.use((config: AxiosRequestConfig) => {
+axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
   const { url, headers, transformResponse } = config;
 
   // Remove the transformers before making the request.
@@ -78,7 +72,7 @@ apiInstances.default.interceptors.request.use((config: AxiosRequestConfig) => {
   return config;
 });
 
-apiInstances.default.interceptors.response.use(
+axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => {
     // on fulfilled
     logger.log("success response", response);
@@ -118,12 +112,4 @@ apiInstances.default.interceptors.response.use(
   }
 );
 
-export function getApiTypes(): ApiType[] {
-  return Object.keys(apiInstances) as ApiType[];
-}
-
-export function getApi(apiType?: ApiType): AxiosInstance {
-  return apiInstances[apiType || "default"];
-}
-
-export default getApi;
+export default axiosInstance;

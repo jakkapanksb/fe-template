@@ -13,7 +13,7 @@ const appConfig = {
   id: "localDevelopment",
   isTest: isTest(), // to determine whether JEST is running in the code.
   settings: {
-    shouldMockApiResponse: true,
+    shouldMockApiResponse: false,
     apiMockDelay: 1000,
     // shouldCacheTranslation: false, // TODO: Check later if we need this flag
     // shouldLog: true, // TODO: Check later if we need this flag
@@ -27,7 +27,7 @@ const appConfig = {
   },
   // TODO: Add this later once we have the backend setup.
   urls: {
-    apiBase: "",
+    apiBase: "https://rickandmortyapi.com/api/",
     staticContentBase: "",
   },
 };

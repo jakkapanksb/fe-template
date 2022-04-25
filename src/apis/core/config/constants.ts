@@ -3,5 +3,4 @@ export const HEADER_PLATFORM = "WEB";
 
 export enum ApiType {
   Default = "default",
-  StaticContent = "staticContent",
 }
