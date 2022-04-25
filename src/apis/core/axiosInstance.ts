@@ -6,11 +6,7 @@ import axios, {
   AxiosResponseTransformer,
 } from "axios";
 import { createLogger, environment } from "../../utils";
-import {
-  ApiType,
-  HEADER_CONTENT_TYPE,
-  HEADER_PLATFORM,
-} from "./config/constants";
+import { HEADER_CONTENT_TYPE, HEADER_PLATFORM } from "./config/constants";
 import baseTransformer from "./utils/baseTransformer";
 import { isApiResponseSuccess } from "./utils/responseUtils";
 
@@ -28,7 +24,7 @@ export const getCommonHeaders = (): { [key: string]: string } => {
 };
 
 export const axiosInstance: AxiosInstance = axios.create({
-  baseURL: environment.urls.apiBase,
+  baseURL: environment.apiBase,
   responseType: "json",
   transformResponse: (data) => data,
 });

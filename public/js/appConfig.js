@@ -25,11 +25,8 @@ const appConfig = {
     //   transactionSampleRate: 0.1,
     // },
   },
-  // TODO: Add this later once we have the backend setup.
-  urls: {
-    apiBase: "https://rickandmortyapi.com/api/",
-    staticContentBase: "",
-  },
+  // TODO: Modify this once we have the backend setup.
+  apiBase: "https://rickandmortyapi.com/api/",
 };
 // Make it global
 window.appConfig = appConfig;

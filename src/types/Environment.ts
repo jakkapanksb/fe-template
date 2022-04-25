@@ -4,12 +4,7 @@ export interface Environment {
   isTest?: boolean;
 
   settings: Settings;
-  urls: Urls;
-}
-
-export interface Urls {
   apiBase: string;
-  staticContentBase: string;
 }
 
 export interface Settings {
