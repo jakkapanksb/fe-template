@@ -1,4 +1,4 @@
-import { Alert, AlertProps, SxProps, Theme } from "@mui/material";
+import { Alert, AlertProps } from "@mui/material";
 import { FC, ReactNode } from "react";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
@@ -14,7 +14,6 @@ const icons = {
 interface CommonAlertProps extends Omit<AlertProps, "severity"> {
   severity: "success" | "info" | "warning" | "error";
   content: string | ReactNode;
-  sx?: SxProps<Theme>;
 }
 
 const CommonAlert: FC<CommonAlertProps> = props => {

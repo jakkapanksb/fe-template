@@ -1,4 +1,4 @@
-import { Chip, ChipProps, SxProps, Theme } from "@mui/material";
+import { Chip, ChipProps } from "@mui/material";
 import { FC } from "react";
 
 interface CommonChipProps extends Omit<ChipProps, "variant"> {
@@ -11,7 +11,7 @@ interface CommonChipProps extends Omit<ChipProps, "variant"> {
     | "recommended"
     | "active"
     | "overdue";
-  sx?: SxProps<Theme>;
+  label: React.ReactNode;
 }
 
 const CommonChip: FC<CommonChipProps> = props => {
