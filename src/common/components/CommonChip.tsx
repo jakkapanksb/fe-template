@@ -11,7 +11,6 @@ interface CommonChipProps extends Omit<ChipProps, "variant"> {
     | "recommended"
     | "active"
     | "overdue";
-  label: React.ReactNode;
   sx?: SxProps<Theme>;
 }
 

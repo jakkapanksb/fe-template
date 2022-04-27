@@ -13,7 +13,7 @@ const icons = {
 
 interface CommonAlertProps extends Omit<AlertProps, "severity"> {
   severity: "success" | "info" | "warning" | "error";
-  content?: string | ReactNode;
+  content: string | ReactNode;
   sx?: SxProps<Theme>;
 }
 
