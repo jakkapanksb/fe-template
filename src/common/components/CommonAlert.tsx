@@ -1,24 +1,24 @@
-import { Alert, AlertProps, Box } from "@mui/material";
-import { FC, memo, ReactNode } from "react";
+import { Alert, AlertProps, SxProps, Theme } from "@mui/material";
+import { FC, ReactNode } from "react";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
-interface CommonAlertProps extends Omit<AlertProps, "variant"> {
-  children?: ReactNode;
-  variant: "success" | "info" | "warning" | "error";
+const icons = {
+  success: <CheckCircleOutlineIcon aria-label="success-icon" />,
+  error: <WarningAmberIcon aria-label="error-icon" />,
+  warning: <WarningAmberIcon aria-label="warning-icon" />,
+  info: <InfoOutlinedIcon aria-label="info-icon" />,
+};
+
+interface CommonAlertProps extends Omit<AlertProps, "severity"> {
+  severity: "success" | "info" | "warning" | "error";
   content?: string | ReactNode;
+  sx?: SxProps<Theme>;
 }
 
 const CommonAlert: FC<CommonAlertProps> = props => {
-  const { children, variant, content, ...otherProps } = props;
-
-  const icons = {
-    success: <CheckCircleOutlineIcon aria-label="success-icon" />,
-    error: <WarningAmberIcon aria-label="error-icon" />,
-    warning: <WarningAmberIcon aria-label="warning-icon" />,
-    info: <InfoOutlinedIcon aria-label="info-icon" />,
-  };
+  const { children, sx = [], severity, content, ...otherProps } = props;
 
   //wait for color theme spec
   const alertColor = {
@@ -47,25 +47,28 @@ const CommonAlert: FC<CommonAlertProps> = props => {
   return (
     <Alert
       {...otherProps}
-      icon={icons[variant]}
-      sx={{
-        ...alertColor[variant],
-        border: "1px solid",
-        "&.MuiAlert-root": {
-          padding: "8px",
-          width: "inherit",
-          display: "flex",
-          borderRadius: "4px",
-          fontSize: "16px",
+      icon={icons[severity]}
+      sx={[
+        {
+          ...alertColor[severity],
+          border: "1px solid",
+          "&.MuiAlert-root": {
+            padding: 1,
+            width: "inherit",
+            display: "flex",
+            borderRadius: 1,
+            fontSize: "16px",
+          },
+          "& .MuiAlert-icon": {
+            color: alertColor[severity].color,
+          },
         },
-        "& .MuiAlert-icon": {
-          color: alertColor[variant].color,
-        },
-      }}
+        ...(Array.isArray(sx) ? sx : [sx]),
+      ]}
     >
-      {content ? content : <Box>{children}</Box>}
+      {content}
     </Alert>
   );
 };
 
-export default memo(CommonAlert);
+export default CommonAlert;

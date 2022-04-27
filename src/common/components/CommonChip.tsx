@@ -1,5 +1,5 @@
-import { Chip, ChipProps } from "@mui/material";
-import { FC, memo } from "react";
+import { Chip, ChipProps, SxProps, Theme } from "@mui/material";
+import { FC } from "react";
 
 interface CommonChipProps extends Omit<ChipProps, "variant"> {
   variant:
@@ -12,10 +12,11 @@ interface CommonChipProps extends Omit<ChipProps, "variant"> {
     | "active"
     | "overdue";
   label: React.ReactNode;
+  sx?: SxProps<Theme>;
 }
 
 const CommonChip: FC<CommonChipProps> = props => {
-  const { variant, ...otherProps } = props;
+  const { variant, sx = [], ...otherProps } = props;
 
   //wait for color theme spec
   const variants = {
@@ -56,22 +57,24 @@ const CommonChip: FC<CommonChipProps> = props => {
   return (
     <Chip
       {...otherProps}
-      sx={{
-        ...variants[variant],
-        "&.MuiChip-root": {
-          borderRadius: "4px",
-          height: "auto",
-          minHeight: 32,
-          maxWidth: "100%",
+      sx={[
+        {
+          ...variants[variant],
+          "&.MuiChip-root": {
+            borderRadius: 1,
+            height: "auto",
+            minHeight: 32,
+          },
+          "& .MuiChip-label": {
+            fontWeight: "bold",
+            paddingLeft: 1,
+            paddingRight: 1,
+          },
         },
-        "& .MuiChip-label": {
-          fontWeight: "bold",
-          paddingLeft: "8px",
-          paddingRight: "8px",
-        },
-      }}
+        ...(Array.isArray(sx) ? sx : [sx]),
+      ]}
     />
   );
 };
 
-export default memo(CommonChip);
+export default CommonChip;
