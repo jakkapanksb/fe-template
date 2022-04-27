@@ -5,7 +5,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import "./App.css";
 import AppRoutes from "./app/AppRoutes";
 import { DateProvider } from "./common/components/DateProvider";
-import { theme } from "./theme";
+import theme from "./theme";
 
 const queryClient = new QueryClient();
 

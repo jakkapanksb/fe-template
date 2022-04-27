@@ -44,3 +44,21 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+##### Logging
+
+`console` methods are banned from the source code by the lint rule. You can still use it during development but do _not_ commit the code.
+
+If you want to log something in the build, you must use `createLogger` utility to create a logger.
+
+```ts
+// "yourScope" here refers to the name of your component/feature
+// If you want to have sub-scopes, you should separate it by ":", like "yourScope:method"
+const logger = createLogger("yourScope");
+
+// Use it like you would use console methods
+logger.log("message", variable);
+logger.error(error);
+```
+
+The logs from the logger with not be displayed on your console by default, to prevent the logs to spam other developers. **You must enable the log manually in order to see it.** You can do this by typing in `localStorage.debug = 'app:yourScope'` in your console and refresh the browser. You can also add other scopes you're interested in to the debug property like `localStorage.debug = 'app:yourScope,app:api:*'` or use wildcard `localStorage.debug = 'app:*` to display all logs. For more information, see [debug module readme](https://www.npmjs.com/package/debug).

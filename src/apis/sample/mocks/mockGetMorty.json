@@ -1,0 +1,27 @@
+{
+  "status": {
+    "code": 1000,
+    "header": "SUCCESS",
+    "description": ""
+  },
+  "data": {
+    "id": 630,
+    "name": "Morty Smith MOCK!",
+    "status": "Alive",
+    "species": "Human",
+    "type": "Soulless Puppet",
+    "gender": "Male",
+    "origin": {
+      "name": "Story Train",
+      "url": "https://rickandmortyapi.com/api/location/96"
+    },
+    "location": {
+      "name": "Story Train",
+      "url": "https://rickandmortyapi.com/api/location/96"
+    },
+    "image": "https://rickandmortyapi.com/api/character/avatar/630.jpeg",
+    "episode": ["https://rickandmortyapi.com/api/episode/37"],
+    "url": "https://rickandmortyapi.com/api/character/630",
+    "created": "2020-08-06T16:38:30.136Z"
+  }
+}
